@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+>
+    <data>
+        <import type="com.example.baseproject.common.AppUtils"/>
+        <import type="com.example.baseproject.database.DateTypeConverter"/>
+        <import type="com.example.baseproject.common.AppConstant"/>
+        <variable type="com.example.baseproject.models.TaskModel" name="task"/>
+    </data>
+
+    <FrameLayout android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:background="@color/colorPrimary">
+
+
+        <RelativeLayout android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="10dp"
+                        android:padding="10dp"
+                        android:background="@android:color/white">
+
+            <com.example.baseproject.common.customView.CircularImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/wallpaper"
+                    android:id="@+id/image"
+                    android:layout_marginRight="10dp"/>
+
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_toRightOf="@+id/image"
+                      android:text="@{task.title , default = @string/title}"
+                      android:id="@+id/heading"/>
+                      <!--android:text="@{task.title , default = @string/title}"-->
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_below="@+id/heading"
+                      android:layout_toRightOf="@+id/image"
+                      android:text="@{AppUtils.parseDateFormat(DateTypeConverter.toDate(task.date), AppConstant.FULL_DATE_FORMAT) , default= @string/time}"
+                      android:id="@+id/time"/>
+
+
+        </RelativeLayout>
+    </FrameLayout>
+</layout>

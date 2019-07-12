@@ -1,0 +1,6 @@
+Dagger Errors
+
+1. Caused by: java.lang.IllegalArgumentException: No injector factory bound for Class
+        Declare the Activity in ActivityBuilderModule.
+         @ContributesAndroidInjector
+            abstract NavigationBarActivity navigationBarActivity();

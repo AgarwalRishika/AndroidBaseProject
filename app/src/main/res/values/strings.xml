@@ -1,3 +1,33 @@
 <resources>
     <string name="app_name">BaseProject</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login_label">Let\'s Start with Login!</string>
+    <string name="login_userName">UserName</string>
+    <string name="login_password">Password</string>
+    <string name="login_button">LogIn</string>
+    <string name="login_forgot_password">Forgot Password ?</string>
+    <string name="login_no_account">Don\'t have an Account ?</string>
+    <string name="sign_up">SignUp</string>
+    <string name="dimen_label">20sp</string>
+
+    <string name="signUp_fullName">Enter Your Full Name</string>
+    <string name="signUp_mobileNo">Enter Your Mobile Number</string>
+    <string name="signUp_password">Enter Password</string>
+    <string name="signUp_renterPass">Re-Enter Password</string>
+    <string name="signUp_have_account">Have an Account?</string>
+    <string name="signUp_label">Let\'s Start with Register!</string>
+
+
+    <string name="title">Meeting With Clients</string>
+    <string name="content">Prepare Notes for the projet</string>
+    <string name="time">12:00 AM</string>
+    <string name="addItem">Add Items to List</string>
+    <string name="heading">Add Heading</string>
+    <string name="date">18 Jul 2019</string>
+    <string name="addTask">Add Sub Tasks</string>
+    <string name="dbInsertOperation">Insert Operation Successful</string>
+    <string name="dbOperationFail">DBOperation Failed</string>
+
 </resources>
