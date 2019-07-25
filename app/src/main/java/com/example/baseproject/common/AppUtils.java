@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat;
 import com.example.baseproject.activity.BaseActivity;
 import com.example.baseproject.database.AppDataBase;
 import com.example.baseproject.database.DateTypeConverter;
+import com.example.baseproject.services.MyService;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -159,7 +160,7 @@ arrayList.add(permission);
     }
 
 
-    private AlarmManager getAlarmManager(Context context) {
+    private static AlarmManager getAlarmManager(Context context) {
         return (AlarmManager) context.getSystemService(ALARM_SERVICE);
     }
 
@@ -168,10 +169,16 @@ arrayList.add(permission);
         return pi != null;
     }
 
-    private void createAlarm(Context context,Intent i, int requestCode, long timeInMillis) {
+    public static void createAlarm(Context context,Intent i, long requestCode, long timeInMillis) {
         AlarmManager am = getAlarmManager(context);
-        PendingIntent pi = PendingIntent.getService(context, requestCode, i, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pi = PendingIntent.getService(context, (int)requestCode, i, PendingIntent.FLAG_UPDATE_CURRENT);
         am.set(AlarmManager.RTC_WAKEUP, timeInMillis, pi);
-//        Log.d("OskarSchindler", "createAlarm "+requestCode+" time: "+timeInMillis+" PI "+pi.toString());
+    }
+
+    public static Intent createAlarmIntenet(Context context, long id){
+        Intent intent = new Intent(context , MyService.class);
+        intent.putExtra(AppConstant.INTENT_ID , id);
+        return intent;
+
     }
 }

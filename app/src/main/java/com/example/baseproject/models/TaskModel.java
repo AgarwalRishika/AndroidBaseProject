@@ -2,6 +2,7 @@ package com.example.baseproject.models;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 /**
  * created by Rishika Agarwal on 6/26/2019.

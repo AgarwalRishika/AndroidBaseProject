@@ -1,12 +1,7 @@
 package com.example.baseproject.activity;
 
 import android.os.Bundle;
-import android.widget.FrameLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import com.example.baseproject.R;
 import com.example.baseproject.fragments.LogInFragment;
 import com.example.baseproject.fragments.SignUpFragment;
@@ -16,14 +11,11 @@ public class AuthenticateActivity extends BaseActivity {
     SignUpFragment signUpFragment;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         init();
         initListener();
-
-
 
 
     }
@@ -50,7 +42,6 @@ public class AuthenticateActivity extends BaseActivity {
     }
 
 
-
     @Override
     public void onFragmentChange() {
         super.onFragmentChange();
@@ -64,7 +55,6 @@ public class AuthenticateActivity extends BaseActivity {
 
 
     }
-
 
 
 }

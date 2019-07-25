@@ -1,0 +1,8 @@
+1)  If your tests rely on resources, enable the includeAndroidResources option in your app's
+build.gradle file. Your unit tests can then access compiled versions of your resources, allowing the
+tests to run more quickly and accurately.
+                  testOptions {
+                         unitTests {
+                             includeAndroidResources = true}}
+
+2)

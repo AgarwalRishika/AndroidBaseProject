@@ -16,7 +16,7 @@ import java.util.List;
 public interface TaskDao {
 
     @Insert
-    void insert(TaskModel... task);
+    long insert(TaskModel task);
 
     @Update
     void update(TaskModel... task);
@@ -29,4 +29,7 @@ public interface TaskDao {
 
     @Query("Select * FROM TaskModel where date >= :minDate AND date<= :maxDate")
     LiveData<List<TaskModel>> taskByDate(long minDate , long maxDate);
+
+    @Query("DELETE FROM TaskModel WHERE id = :id")
+    void deleteTask(int id);
 }

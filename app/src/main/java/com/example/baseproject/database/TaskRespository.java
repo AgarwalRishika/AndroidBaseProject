@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.room.*;
 import com.example.baseproject.common.AppConstant;
 import com.example.baseproject.common.AppUtils;
+import com.example.baseproject.fragments.LogInFragment;
 import com.example.baseproject.interfaces.AfterDbOperationListener;
 import com.example.baseproject.models.TaskModel;
 
@@ -33,15 +34,15 @@ public class TaskRespository {
 
 
     public void insertTask(final TaskModel task) {
-        new AsyncTask<Void, Void, Integer>() {
+        new AsyncTask<Void, Void, Long>() {
             @Override
-            protected Integer doInBackground(Void... voids) {
-                appDataBase.taskDao().insert(task);
-                return 1;
+            protected Long doInBackground(Void... voids) {
+              return  appDataBase.taskDao().insert(task);
+
             }
 
             @Override
-            protected void onPostExecute(Integer result) {
+            protected void onPostExecute(Long result) {
                 super.onPostExecute(result);
                 listener.dbOperationCompleted(result);
             }
@@ -65,18 +66,22 @@ public class TaskRespository {
 //        }.execute();
 //    }
 //
-//    public void deleteTask(final int id) {
-//        final LiveData<Note> task = getTask(id);
-//        if(task != null) {
-//            new AsyncTask<Void, Void, Void>() {
-//                @Override
-//                protected Void doInBackground(Void... voids) {
-//                    appDataBase.daoAccess().deleteTask(task.getValue());
-//                    return null;
-//                }
-//            }.execute();
-//        }
-//    }
+    public void deleteTask(final int id) {
+            new AsyncTask<Void, Void, Void>() {
+                @Override
+                protected Void doInBackground(Void... voids) {
+                    appDataBase.taskDao().deleteTask(id);
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(Void aVoid) {
+                    super.onPostExecute(aVoid);
+                    listener.dbOperationCompleted(null);
+                }
+            }.execute();
+
+    }
 //
 //    public void deleteTask(final Note note) {
 //        new AsyncTask<Void, Void, Void>() {

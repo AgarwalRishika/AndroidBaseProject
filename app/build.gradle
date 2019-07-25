@@ -15,6 +15,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        resValue "string", "google_maps_key", (project.findProperty("GOOGLE_MAPS_API_KEY") ?: "")
     }
     buildTypes {
         release {
@@ -30,6 +31,12 @@ android {
     dataBinding {
         enabled = true
     }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
 }
 
 dependencies {
@@ -44,7 +51,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     // support design
-   implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
 //    implementation 'com.google.android.material:material:1.1.0-alpha07'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     // recyclerView
@@ -53,7 +60,7 @@ dependencies {
     // dagger
     implementation 'com.google.dagger:dagger:2.19'
     implementation "com.google.dagger:dagger-android-support:2.18"
-   kapt "com.google.dagger:dagger-android-processor:2.18"
+    kapt "com.google.dagger:dagger-android-processor:2.18"
     kapt 'com.google.dagger:dagger-compiler:2.19'
     provided 'javax.annotation:jsr250-api:1.0'
 
@@ -75,13 +82,13 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel:2.0.0';
 
     // roomPersistence
-//    implementation 'androidx.room:room-runtime:2.1.0'
-//    annotationProcessor 'androidx.room:room-compiler:2.1.0'
+    implementation 'androidx.room:room-runtime:2.1.0'
+    annotationProcessor 'androidx.room:room-compiler:2.1.0'
 
-
-    compile "android.arch.persistence.room:runtime:1.1.1"
-    annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
-   kapt "android.arch.persistence.room:compiler:1.1.1"
+//
+//    implementation "android.arch.persistence.room:runtime:1.1.1"
+//    annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
+    kapt "android.arch. .room:compiler:1.1.1"
 
 
     // timelineview
@@ -90,6 +97,11 @@ dependencies {
     // dateTimePickerDialog
     implementation 'com.wdullaer:materialdatetimepicker:4.2.1'
 
+    //stetho
+    implementation 'com.facebook.stetho:stetho:1.5.1'
+
+    //map
+    implementation 'com.google.android.gms:play-services-maps:10.2.0'
 
 
 }

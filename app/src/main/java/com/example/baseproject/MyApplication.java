@@ -2,6 +2,7 @@ package com.example.baseproject;
 
 
 import com.example.baseproject.dagger.component.DaggerAppComponent;
+import com.facebook.stetho.Stetho;
 import dagger.android.AndroidInjector;
 import dagger.android.DaggerApplication;
 
@@ -13,6 +14,7 @@ public class MyApplication extends DaggerApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        Stetho.initializeWithDefaults(this);
 //        RoomDB.getInstance(this);
     }
 

@@ -274,13 +274,15 @@ public class CreateTaskActivity extends BaseActivity implements AfterDbOperation
 
     @Override
     public void dbOperationCompleted(Object o) {
-        int result = (int) o;
-        if (result == 1) {
-            UIUtils.showToast(this, getResources().getString(R.string.dbInsertOperation));
-            finish();
-        } else {
-            UIUtils.showToast(this, getResources().getString(R.string.dbOperationFail));
-        }
+        long id = (Long) o;
+//        if (result == 1) {
+        UIUtils.showToast(this, getResources().getString(R.string.dbInsertOperation));
+        Intent intent=    AppUtils.createAlarmIntenet(this , id);
+        AppUtils.createAlarm(this , intent,id,timeCalendar.getTimeInMillis());
+           finish();
+//        } else {
+//            UIUtils.showToast(this, getResources().getString(R.string.dbOperationFail));
+//        }
 
     }
 

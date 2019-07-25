@@ -39,6 +39,7 @@ public abstract class BaseActivity extends DaggerAppCompatActivity implements Fr
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, getLayout());
+        binding.setLifecycleOwner(this);
 
     }
 

@@ -29,5 +29,6 @@
     <string name="addTask">Add Sub Tasks</string>
     <string name="dbInsertOperation">Insert Operation Successful</string>
     <string name="dbOperationFail">DBOperation Failed</string>
+    <string name="title_activity_map">Map</string>
 
 </resources>
