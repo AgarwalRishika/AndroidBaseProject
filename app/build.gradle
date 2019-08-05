@@ -6,6 +6,7 @@ apply plugin: 'kotlin-android-extensions'
 // Add this line to enable kapt
 apply plugin: 'kotlin-kapt'
 
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -82,13 +83,13 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel:2.0.0';
 
     // roomPersistence
-    implementation 'androidx.room:room-runtime:2.1.0'
-    annotationProcessor 'androidx.room:room-compiler:2.1.0'
+//    implementation 'androidx.room:room-runtime:2.1.0'
+//    annotationProcessor 'androidx.room:room-compiler:2.1.0'
 
-//
-//    implementation "android.arch.persistence.room:runtime:1.1.1"
-//    annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
-    kapt "android.arch. .room:compiler:1.1.1"
+
+    implementation "android.arch.persistence.room:runtime:1.1.1"
+    annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
+    kapt "android.arch.persistence.room:compiler:1.1.1"
 
 
     // timelineview
@@ -101,7 +102,11 @@ dependencies {
     implementation 'com.facebook.stetho:stetho:1.5.1'
 
     //map
-    implementation 'com.google.android.gms:play-services-maps:10.2.0'
+//    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+//    implementation 'com.google.maps.android:android-maps-utils-sdk-v3-compat:0.1'
+//    implementation 'com.google.android.gms:play-services:12.0.1'
 
-
+// firebase Auth
+    implementation 'com.google.firebase:firebase-auth:18.1.0'
 }
+apply plugin: 'com.google.gms.google-services'

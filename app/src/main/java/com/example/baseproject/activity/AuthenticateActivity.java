@@ -3,12 +3,18 @@ package com.example.baseproject.activity;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import com.example.baseproject.R;
+import com.example.baseproject.common.AppUtils;
 import com.example.baseproject.fragments.LogInFragment;
 import com.example.baseproject.fragments.SignUpFragment;
+import com.google.firebase.auth.FirebaseAuth;
+
+import javax.inject.Inject;
 
 public class AuthenticateActivity extends BaseActivity {
     LogInFragment logInFragment;
     SignUpFragment signUpFragment;
+    @Inject
+    FirebaseAuth mAuth;
 
 
     @Override
@@ -34,7 +40,13 @@ public class AuthenticateActivity extends BaseActivity {
     void init() {
         super.init();
 
+if(AppUtils.isUserLogIn(mAuth)){
 
+}
+
+else {
+
+}
         logInFragment = new LogInFragment();
         signUpFragment = new SignUpFragment();
         setFragment(logInFragment);
@@ -48,9 +60,9 @@ public class AuthenticateActivity extends BaseActivity {
 
         Fragment fragment = fragmentManager.findFragmentByTag(TAG);
         if (fragment instanceof SignUpFragment) {
-            setFragment(signUpFragment);
-        } else if (fragment instanceof LogInFragment) {
             setFragment(logInFragment);
+        } else if (fragment instanceof LogInFragment) {
+            setFragment(signUpFragment);
         }
 
 

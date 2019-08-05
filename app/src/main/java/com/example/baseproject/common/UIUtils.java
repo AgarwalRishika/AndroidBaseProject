@@ -1,6 +1,7 @@
 package com.example.baseproject.common;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.widget.EditText;
@@ -24,7 +25,7 @@ public class UIUtils {
     }
 
 
-    public static void showToast(AppCompatActivity activity,String msg){
+    public static void showToast(Activity activity, String msg){
         Toast.makeText(activity ,msg, Toast.LENGTH_LONG).show();
     }
 }

@@ -6,6 +6,7 @@ import com.example.baseproject.common.AppConstant;
 import com.example.baseproject.database.AppDataBase;
 import com.example.baseproject.database.TaskRespository;
 import com.example.baseproject.network.RetrofitService;
+import com.google.firebase.auth.FirebaseAuth;
 import dagger.Module;
 import dagger.Provides;
 import retrofit2.Retrofit;
@@ -46,11 +47,9 @@ public class AppModule {
                 AppConstant.DATABASE_NME)
                 .build();
     }
-
-
-//    @Provides
-//    static TaskRespository getTaskRepository(){
-//        return new TaskRespository();
-//    }
-
+    @Provides
+    @Singleton
+    static FirebaseAuth getFireBaseAuth() {
+        return FirebaseAuth.getInstance();
+    }
 }

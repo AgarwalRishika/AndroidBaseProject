@@ -5,4 +5,11 @@ tests to run more quickly and accurately.
                          unitTests {
                              includeAndroidResources = true}}
 
-2)
+
+2)Google maps needs following permissions and features.
+  ACCESS_NETWORK_STATE – To check network state whether data can be downloaded or not
+  INTERNET – To check internet connection status
+  WRITE_EXTERNAL_STORAGE – To write to external storage as google maps store map data in external storage
+  ACCESS_COARSE_LOCATION – To determine user’s location using WiFi and mobile cell data
+  ACCESS_FINE_LOCATION – To determine user’s location using GPS
+  OpenGL ES V2 – Required for Google Maps V2

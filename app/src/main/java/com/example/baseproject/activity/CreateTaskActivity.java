@@ -72,7 +72,7 @@ public class CreateTaskActivity extends BaseActivity implements AfterDbOperation
         activityBinding.video.setOnClickListener(this::click);
         activityBinding.music.setOnClickListener(this::click);
         activityBinding.folder.setOnClickListener(this::click);
-        activityBinding.location.setOnClickListener(this::click);
+        activityBinding.location.setOnClickListener(this::location);
         activityBinding.subTaskCardview.setOnClickListener(this::click);
         activityBinding.add.setOnClickListener(this::click);
         activityBinding.cancel.setOnClickListener(this::click);
@@ -98,6 +98,11 @@ public class CreateTaskActivity extends BaseActivity implements AfterDbOperation
             }
         });
 
+    }
+
+    private void location(View view) {
+        Intent intent = new Intent(this, MapActivity.class);
+        startActivity(intent);
     }
 
     private void showDatePicker(View view) {

@@ -2,6 +2,7 @@ package com.example.baseproject.common;
 
 import android.Manifest;
 import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -11,7 +12,10 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.SystemClock;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -19,6 +23,11 @@ import com.example.baseproject.activity.BaseActivity;
 import com.example.baseproject.database.AppDataBase;
 import com.example.baseproject.database.DateTypeConverter;
 import com.example.baseproject.services.MyService;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -33,6 +42,8 @@ import static android.content.Context.ALARM_SERVICE;
  * created by Rishika Agarwal on 6/25/2019.
  */
 public class AppUtils<T> {
+
+//    public String TAG = getClass().getSimpleName();
 
 
     public static void startActivity(Context context , Class c){
@@ -179,6 +190,66 @@ arrayList.add(permission);
         Intent intent = new Intent(context , MyService.class);
         intent.putExtra(AppConstant.INTENT_ID , id);
         return intent;
+
+    }
+
+    public static boolean isUserLogIn(FirebaseAuth mAuth){
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        return currentUser!=null;
+    }
+
+
+    public static void firebaseSignUpEmailPass(FirebaseAuth mAuth , String email , String password , Activity context){
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(context, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+//                            Log.d(TAG, "createUserWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            UIUtils.showToast(context , "Create Account Successful");
+//                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+//                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            UIUtils.showToast(context , "Create Account Fail");
+
+                        }
+
+                        // ...
+                    }
+                });
+
+    }
+
+
+
+    public static void firebaseLogInEmailPass(FirebaseAuth mAuth , String email , String password , Activity context) {
+
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(context, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+//                            Log.d(TAG, "signInWithEmail:success");
+                            UIUtils.showToast(context , "LogIn SuccessFul");
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            UIUtils.showToast(context , "LogIn Fail");
+                        }
+
+                        // ...
+                    }
+                });
+
+
+    }
+
+
+    public static void signOut(){
+        FirebaseAuth.getInstance().signOut();
 
     }
 }
