@@ -21,7 +21,7 @@ public class AuthenticateActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         init();
-        initListener();
+
 
 
     }
@@ -40,16 +40,16 @@ public class AuthenticateActivity extends BaseActivity {
     void init() {
         super.init();
 
-if(AppUtils.isUserLogIn(mAuth)){
+        if (AppUtils.isUserLogIn(mAuth)) {
+            AppUtils.startActivity(this , MainActivity.class);
+            finish();
+        } else {
+            logInFragment = new LogInFragment();
+            signUpFragment = new SignUpFragment();
+            setFragment(logInFragment);
+            initListener();
+        }
 
-}
-
-else {
-
-}
-        logInFragment = new LogInFragment();
-        signUpFragment = new SignUpFragment();
-        setFragment(logInFragment);
 
     }
 

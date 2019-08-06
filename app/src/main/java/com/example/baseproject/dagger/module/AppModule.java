@@ -7,6 +7,7 @@ import com.example.baseproject.database.AppDataBase;
 import com.example.baseproject.database.TaskRespository;
 import com.example.baseproject.network.RetrofitService;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 import dagger.Module;
 import dagger.Provides;
 import retrofit2.Retrofit;
@@ -51,5 +52,13 @@ public class AppModule {
     @Singleton
     static FirebaseAuth getFireBaseAuth() {
         return FirebaseAuth.getInstance();
+    }
+
+
+    // Access a Cloud Firestore instance from your Activity
+    @Provides
+    @Singleton
+    static FirebaseFirestore getFirebaseFireStore() {
+        return  FirebaseFirestore.getInstance();
     }
 }

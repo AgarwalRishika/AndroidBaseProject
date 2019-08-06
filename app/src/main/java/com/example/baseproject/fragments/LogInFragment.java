@@ -1,32 +1,32 @@
 package com.example.baseproject.fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.TextView;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import butterknife.OnClick;
 import com.example.baseproject.R;
-import com.example.baseproject.activity.NavigationBarActivity;
+import com.example.baseproject.activity.MainActivity;
 import com.example.baseproject.common.AppUtils;
 import com.example.baseproject.databinding.FragmentLogInBinding;
+import com.example.baseproject.interfaces.FirebaseOperationListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import javax.inject.Inject;
 
 
-public class LogInFragment extends BaseFragment {
+public class LogInFragment extends BaseFragment implements FirebaseOperationListener {
 
     FragmentLogInBinding fragmentBinding;
+    @Inject
+    FirebaseAuth mAuth;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v =   super.onCreateView(inflater ,container , savedInstanceState);
-        fragmentBinding = (FragmentLogInBinding)binding;
+        View v = super.onCreateView(inflater, container, savedInstanceState);
+        fragmentBinding = (FragmentLogInBinding) binding;
         init();
         initListener();
         return v;
@@ -51,19 +51,50 @@ public class LogInFragment extends BaseFragment {
         fragmentBinding.logIn.setOnClickListener(this::logIn);
     }
 
-    public void showSignUp(View v){
+    public void showSignUp(View v) {
         listener.onFragmentChange();
     }
 
 
-    public void logIn(View v){
-        AppUtils.startActivity(getActivity() , NavigationBarActivity.class);
+    public void logIn(View v) {
+        AppUtils.firebaseLogInEmailPass(mAuth, fragmentBinding.etUserName.getText().toString(), fragmentBinding.etPassword.getText().toString(), getActivity(), this);
+
 
     }
-
 
 
     public void onClick(View v) {
 
     }
+
+    @Override
+    public void firebaseOperationCompleted(Object o, Class c) {
+        if (c.equals(FirebaseAuth.class)) {
+            AppUtils.startActivity(getActivity(), MainActivity.class);
+        } else if (c.equals(FirebaseFirestore.class)) {
+
+        }
+
+    }
+
+    @Override
+    public void firebaseOperationFailed(Object o, Class c) {
+        if (c.equals(FirebaseAuth.class)) {
+
+        } else if (c.equals(FirebaseFirestore.class)) {
+
+        }
+    }
+
+    @Override
+    public void firebaseOperationSuccess(Object o, Class c) {
+
+    }
+
+//    @Override
+//    public void firebaseOperationComplete(Object o, Class c) {
+//
+//    }
+
+
 }

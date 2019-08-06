@@ -1,11 +1,8 @@
 package com.example.baseproject.dagger.module;
 
 import com.example.baseproject.activity.AuthenticateActivity;
-import com.example.baseproject.activity.BaseActivity;
 import com.example.baseproject.activity.CreateTaskActivity;
-import com.example.baseproject.activity.NavigationBarActivity;
 import dagger.Module;
-import dagger.Provides;
 import dagger.android.ContributesAndroidInjector;
 
 /**
@@ -21,8 +18,6 @@ public abstract class ActivityBuilderModule {
 //    @ContributesAndroidInjector
 //    abstract BaseActivity baseActivity();
 
-    @ContributesAndroidInjector
-    abstract NavigationBarActivity navigationBarActivity();
 
     @ContributesAndroidInjector
     abstract CreateTaskActivity createTaskActivity();

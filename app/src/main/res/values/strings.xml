@@ -30,5 +30,6 @@
     <string name="dbInsertOperation">Insert Operation Successful</string>
     <string name="dbOperationFail">DBOperation Failed</string>
     <string name="title_activity_map">Map</string>
+    <string name="signUp_email">Enter Your Email Id</string>
 
 </resources>

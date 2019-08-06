@@ -60,6 +60,13 @@
                       android:padding="10dp"
                       android:layout_marginTop="18dp"
                       android:background="@drawable/round_corner_text_view"/>
+            <EditText android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:hint="@string/signUp_email"
+                      android:id="@+id/et_email"
+                      android:padding="10dp"
+                      android:layout_marginTop="18dp"
+                      android:background="@drawable/round_corner_text_view"/>
 
             <EditText android:layout_width="match_parent"
                       android:layout_height="wrap_content"

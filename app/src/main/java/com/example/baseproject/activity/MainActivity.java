@@ -1,27 +1,60 @@
 package com.example.baseproject.activity;
 
-import  android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.TextView;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import android.view.MenuItem;
+import android.view.View;
+import androidx.annotation.NonNull;
 import com.example.baseproject.R;
-import com.example.baseproject.common.AppConstant;
-import com.example.baseproject.database.AppDataBase;
+import com.example.baseproject.databinding.ActivityMainBinding;
+import com.example.baseproject.fragments.ScheduleTaskFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import dagger.android.AndroidInjection;
-import javax.inject.Inject;
+public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+    ActivityMainBinding activityBinding;
 
-public class MainActivity extends AppCompatActivity {
-    @BindView(R.id.textView)
-    TextView textView;
+    String TAG = "FRAGMENT";
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+//        setContentView(R.layout.activity_navigation_bar);
+        init();
 
+
+    }
+
+    @Override
+    int getLayout() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    void init() {
+        activityBinding = (ActivityMainBinding) binding;
+
+        activityBinding.bottomNavigationView.setVisibility(View.GONE);
+        activityBinding.bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        setFragment(new ScheduleTaskFragment());
+
+
+    }
+
+
+    @Override
+    public void onFragmentChange() {
+        super.onFragmentChange();
+
+
+    }
+
+    public void showCategoryFragment(MenuItem item) {
+
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        setFragment(new ScheduleTaskFragment());
+        return true;
     }
 }
