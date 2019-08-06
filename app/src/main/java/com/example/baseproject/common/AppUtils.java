@@ -20,21 +20,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import com.example.baseproject.activity.BaseActivity;
+import com.example.baseproject.activity.MainActivity;
 import com.example.baseproject.database.AppDataBase;
 import com.example.baseproject.database.DateTypeConverter;
+import com.example.baseproject.databinding.FragmentSignUpBinding;
+import com.example.baseproject.interfaces.FirebaseOperationListener;
 import com.example.baseproject.services.MyService;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 
 import static android.content.Context.ALARM_SERVICE;
 
@@ -199,50 +204,52 @@ arrayList.add(permission);
     }
 
 
-    public static void firebaseSignUpEmailPass(FirebaseAuth mAuth , String email , String password , Activity context){
-        mAuth.createUserWithEmailAndPassword(email, password)
+    public static void firebaseSignUpEmailPass(FirebaseAuth mAuth , String email , String password , Activity context , FirebaseOperationListener listener){
+        mAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+            @Override
+            public void onSuccess(AuthResult authResult) {
+                UIUtils.showToast(context , "Create Account Successful");
+                listener.firebaseOperationSuccess(authResult , FirebaseAuth.class);
+            }
+        })
                 .addOnCompleteListener(context, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-//                            Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            UIUtils.showToast(context , "Create Account Successful");
-//                            updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-//                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            UIUtils.showToast(context , "Create Account Fail");
 
-                        }
-
-                        // ...
+listener.firebaseOperationCompleted(task , FirebaseAuth.class);
                     }
-                });
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                UIUtils.showToast(context , "Fail");
+                listener.firebaseOperationFailed(e , FirebaseAuth.class);
+            }
+        });
 
     }
 
 
 
-    public static void firebaseLogInEmailPass(FirebaseAuth mAuth , String email , String password , Activity context) {
+    public static void firebaseLogInEmailPass(FirebaseAuth mAuth , String email , String password , Activity context , FirebaseOperationListener listener) {
 
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(context, new OnCompleteListener<AuthResult>() {
+        mAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+            @Override
+            public void onSuccess(AuthResult authResult) {
+                listener.firebaseOperationSuccess(authResult , FirebaseAuth.class);
+                UIUtils.showToast(context , "LogIn SuccessFul");
+            }
+        }).addOnCompleteListener(context, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-//                            Log.d(TAG, "signInWithEmail:success");
-                            UIUtils.showToast(context , "LogIn SuccessFul");
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            UIUtils.showToast(context , "LogIn Fail");
-                        }
-
-                        // ...
+                       listener.firebaseOperationCompleted(task , FirebaseAuth.class);
                     }
-                });
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                listener.firebaseOperationFailed(e , FirebaseAuth.class);
+
+            }
+        });
 
 
     }
@@ -252,4 +259,56 @@ arrayList.add(permission);
         FirebaseAuth.getInstance().signOut();
 
     }
+
+    public static void saveDataToFireStore(Map<String,String> map , FirebaseFirestore db , Activity context , String email , FirebaseOperationListener listener){
+
+//        DocumentReference messageRef = db
+//                .collection("rooms").document("roomA")
+//                .collection("messages").document("message1");
+// Add a new document with a generated ID
+        db.collection("usersDetail").document(email).set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                UIUtils.showToast(context , "Success");
+                listener.firebaseOperationSuccess("success" , FirebaseFirestore.class);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        UIUtils.showToast(context , "Fail");
+                        listener.firebaseOperationFailed("Fail" , FirebaseFirestore.class);
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                listener.firebaseOperationCompleted(task , FirebaseFirestore.class);
+            }
+        });
+    }
+
+
+    public static void readDataFromFirestore(FirebaseFirestore db , String email){
+
+//            DocumentReference user = db.collection("usersDetail").document(email);
+//            user.get().addOnCompleteListener(new OnCompleteListener <DocumentSnapshot> () {
+//                @Override
+//                public void onComplete(@NonNull Task < DocumentSnapshot > task) {
+//                    if (task.isSuccessful()) {
+//                        DocumentSnapshot doc = task.getResult();
+//                        StringBuilder fields = new StringBuilder("");
+//                        fields.append("Name: ").append(doc.get("Name"));
+//                        fields.append("\nEmail: ").append(doc.get("Email"));
+//                        fields.append("\nPhone: ").append(doc.get("Phone"));
+//                        textDisplay.setText(fields.toString());
+//                    }
+//                }
+//            })
+//                    .addOnFailureListener(new OnFailureListener() {
+//                        @Override
+//                        public void onFailure(@NonNull Exception e) {
+//                        }
+//                    });
+
+    }
+
 }

@@ -29,4 +29,9 @@ public class AppConstant{
 
     public static final String INTENT_ID = "id";
 
+    public static final String EMAIL =  "email";
+    public static final String NAME = "name";
+    public static final String MOBILENO = "mblNo";
+    public static final  String PASSWORD = "password";
+
 }

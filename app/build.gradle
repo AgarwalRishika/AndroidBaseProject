@@ -108,5 +108,7 @@ dependencies {
 
 // firebase Auth
     implementation 'com.google.firebase:firebase-auth:18.1.0'
+    // firebase cloud firestore
+    implementation 'com.google.firebase:firebase-firestore:20.2.0'
 }
 apply plugin: 'com.google.gms.google-services'
