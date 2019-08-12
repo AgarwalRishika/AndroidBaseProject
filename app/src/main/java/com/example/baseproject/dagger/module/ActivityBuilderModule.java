@@ -2,6 +2,7 @@ package com.example.baseproject.dagger.module;
 
 import com.example.baseproject.activity.AuthenticateActivity;
 import com.example.baseproject.activity.CreateTaskActivity;
+import com.example.baseproject.activity.MainActivity;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 
@@ -21,5 +22,7 @@ public abstract class ActivityBuilderModule {
 
     @ContributesAndroidInjector
     abstract CreateTaskActivity createTaskActivity();
+    @ContributesAndroidInjector
+    abstract MainActivity mainActivity();
 
 }
