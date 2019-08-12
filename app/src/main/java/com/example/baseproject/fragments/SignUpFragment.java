@@ -10,6 +10,7 @@ import com.example.baseproject.R;
 import com.example.baseproject.activity.MainActivity;
 import com.example.baseproject.common.AppConstant;
 import com.example.baseproject.common.AppUtils;
+import com.example.baseproject.common.UIUtils;
 import com.example.baseproject.databinding.FragmentSignUpBinding;
 import com.example.baseproject.interfaces.FirebaseOperationListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,6 +32,7 @@ public class SignUpFragment extends BaseFragment implements FirebaseOperationLis
     FirebaseAuth mAuth;
     @Inject
     FirebaseFirestore firebaseFirestore;
+    private String TAG = getClass().getSimpleName();
 
     public SignUpFragment() {
         // Required empty public constructor
@@ -85,7 +87,9 @@ public class SignUpFragment extends BaseFragment implements FirebaseOperationLis
     }
 
     @Override
-    public void firebaseOperationFailed(Object o, Class c) {
+    public void firebaseOperationFailed(Exception e, Class c) {
+        UIUtils.showToast(getActivity(), e.toString());
+        UIUtils.showLog(TAG , e.toString());
         if (c.equals(FirebaseAuth.class)) {
 
         } else if (c.equals(FirebaseFirestore.class)) {

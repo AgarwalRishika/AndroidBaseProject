@@ -276,7 +276,7 @@ listener.firebaseOperationCompleted(task , FirebaseAuth.class);
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         UIUtils.showToast(context , "Fail");
-                        listener.firebaseOperationFailed("Fail" , FirebaseFirestore.class);
+                        listener.firebaseOperationFailed(e , FirebaseFirestore.class);
                     }
                 }).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

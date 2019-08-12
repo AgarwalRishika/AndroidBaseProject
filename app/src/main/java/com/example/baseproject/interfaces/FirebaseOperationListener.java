@@ -6,7 +6,7 @@ package com.example.baseproject.interfaces;
 public interface FirebaseOperationListener {
 
     void firebaseOperationCompleted(Object o , Class c);
-    void firebaseOperationFailed(Object o , Class c);
+    void firebaseOperationFailed(Exception e , Class c);
     void firebaseOperationSuccess(Object o , Class c);
 //    void firebaseOperationCancel(Object o , Class c);
 
