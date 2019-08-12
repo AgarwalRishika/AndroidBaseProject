@@ -31,5 +31,7 @@
     <string name="dbOperationFail">DBOperation Failed</string>
     <string name="title_activity_map">Map</string>
     <string name="signUp_email">Enter Your Email Id</string>
+    <string name="Open">NavOpen</string>
+    <string name="Close">NavClose</string>
 
 </resources>

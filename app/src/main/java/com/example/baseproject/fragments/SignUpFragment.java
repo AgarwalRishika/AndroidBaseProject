@@ -107,6 +107,7 @@ public class SignUpFragment extends BaseFragment implements FirebaseOperationLis
 //
         } else if (c.equals(FirebaseFirestore.class)) {
             AppUtils.startActivity(getActivity(), MainActivity.class);
+            getActivity().finish();
         }
     }
 

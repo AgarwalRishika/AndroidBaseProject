@@ -71,6 +71,7 @@ public class LogInFragment extends BaseFragment implements FirebaseOperationList
     public void firebaseOperationCompleted(Object o, Class c) {
         if (c.equals(FirebaseAuth.class)) {
             AppUtils.startActivity(getActivity(), MainActivity.class);
+            getActivity().finish();
         } else if (c.equals(FirebaseFirestore.class)) {
 
         }
